@@ -1,0 +1,8 @@
+dnsmasq:
+  image: bjmi/dnsmasq
+  net: host
+  volumes:
+    - ./dnsmasq.d:/etc/dnsmasq.d
+  cap_add:
+    - NET_ADMIN
+  restart: always

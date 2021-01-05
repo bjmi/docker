@@ -1,0 +1,11 @@
+image: bjmi/dnsmasq:latest
+manifests:
+  - image: bjmi/dnsmasq:latest-amd64
+    platform:
+      architecture: amd64
+      os: linux
+  - image: bjmi/dnsmasq:latest-arm64v8
+    platform:
+      architecture: arm64
+      os: linux
+      variant: v8

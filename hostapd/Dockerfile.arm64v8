@@ -1,0 +1,22 @@
+FROM alpine AS builder
+
+# Download QEMU, see https://github.com/docker/hub-feedback/issues/1261
+ENV QEMU_URL https://github.com/balena-io/qemu/releases/download/v4.0.0%2Bbalena2/qemu-4.0.0.balena2-aarch64.tar.gz
+RUN set -xe; \
+    apk add curl; \
+    curl -L ${QEMU_URL} | tar zxvf - -C . --strip-components 1
+
+# Dockerfile for hostapd
+FROM arm64v8/alpine
+
+# Add QEMU
+COPY --from=builder qemu-aarch64-static /usr/bin
+
+MAINTAINER Björn Michael <b.michael@gmx.de>
+
+RUN set -xe; \
+    apk add --no-cache hostapd iw
+
+VOLUME /etc/hostapd
+
+ENTRYPOINT ["hostapd", "-P", "/run/hostapd.pid", "/etc/hostapd/hostapd.conf"]

@@ -1,0 +1,10 @@
+version: '2'
+services:
+  hostapd:
+    image: bjmi/hostapd
+    network_mode: host
+    volumes:
+      - ./hostapd:/etc/hostapd
+    cap_add:
+      - NET_ADMIN
+    restart: always

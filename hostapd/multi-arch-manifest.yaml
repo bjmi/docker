@@ -1,0 +1,11 @@
+image: bjmi/hostapd:latest
+manifests:
+  - image: bjmi/hostapd:latest-amd64
+    platform:
+      architecture: amd64
+      os: linux
+  - image: bjmi/hostapd:latest-arm64v8
+    platform:
+      architecture: arm64
+      os: linux
+      variant: v8

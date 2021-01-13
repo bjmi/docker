@@ -1,11 +1,13 @@
 # Dockerfile for hostapd
-FROM alpine
+FROM alpine:3.12
 
 MAINTAINER Björn Michael <b.michael@gmx.de>
 
 RUN set -xe; \
     apk add --no-cache hostapd iw
 
-VOLUME /etc/hostapd
+VOLUME /etc/hostapd /start.d
 
-ENTRYPOINT ["hostapd", "-P", "/run/hostapd.pid", "/etc/hostapd/hostapd.conf"]
+ADD start.sh /
+
+CMD ["/start.sh"]

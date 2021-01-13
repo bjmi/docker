@@ -16,6 +16,7 @@ services:
     network_mode: host
     volumes:
       - ./hostapd:/etc/hostapd
+      - ./scripts:/start.d
     cap_add:
       - NET_ADMIN
     restart: always
